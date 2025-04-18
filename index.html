@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Network</title>
+</head>
+<body>
+    <h1>Лента новостей</h1>
+    <form action="/create_post" method="POST" enctype="multipart/form-data">
+        <textarea name="content" placeholder="Ваш пост" required></textarea>
+        <input type="file" name="image">
+        <button type="submit">Создать пост</button>
+    </form>
+    <div>
+            <p>{{ post.content }}</p>
+            <form action="/comment/{{ post.id }}" method="POST">
+                <input type="text" name="content" placeholder="Комментарий" required>
+                <button type="submit">Добавить комментарий</button>
+            </form>
+            <div>
+                {% for comment in post.comments %}
+                    <p>Комментарий: {{ comment.content }}</p>
+                
+            </div>
+    </div>
+    <a href="/logout">Выйти</a>
+</body>
+</html>

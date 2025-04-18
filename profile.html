@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль {{ user.username }}</title>
+</head>
+<body>
+    <h1>Профиль {{ user.username }}</h1>
+    <h2>Сообщения</h2>
+    <ul>
+        {% for message in messages %}
+            <li>{{ message.content }} - от {{ message.sender.username }} ({{ message.timestamp }})</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Отправить сообщение</h2>
+    <form action="{{ url_for('send_message', receiver_id=user.id) }}" method="POST">
+        <textarea name="content" placeholder="Ваше сообщение" required></textarea>
+        <button type="submit">Отправить сообщение</button>
+    </form>
+    <h2>Посты:</h2>
+    <div>
+            <p>{{ post.content }}</p>
+            <a href="/delete_post/{{ post.id }}">Удалить пост</a>
+        {% endfor %}
+    </div>
+    <h2>Друзья:</h2>
+    <div>
+        {% for friend in friends %}
+            <p>{{ friend.username }}</p>
+        {% endfor %}
+    </div>
+    <a href="/">Назад на главную</a>
+</body>
+</html>
